@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect & Create</title>
+    <style>
+    * {
+     margin: 0;
+    padding: 0;
+      box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #16213e;
+            border-radius: 12px;
+            padding: 18px 25px;
+            margin-bottom: 25px;
+        }
+
+        .logo-text {
+            font-size: 1.9rem;
+            font-weight: bold;
+            color: #4fc3f7;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 12px 18px;
+            border-radius: 8px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-card {
+            background: #16213e;
+            border-radius: 15px;
+            padding: 28px;
+            border: 1px solid #2a3f5f;
+        }
+
+        .section-card h2 {
+            margin-bottom: 18px;
+            color: #4fc3f7;
+            font-size: 1.7rem;
+        }
+
+        .form-field {
+            margin-bottom: 18px;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #2a3f5f;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #0f1419;
+            color: #ffffff;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: #8892b0;
+        }
+
+        .error-text {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .submit-btn {
+            background: #4fc3f7;
+            color: #1a1a2e;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .todo-input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input-area input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #2a3f5f;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #0f1419;
+            color: #ffffff;
+        }
+
+        .todo-input-area input::placeholder {
+            color: #8892b0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #0f1419;
+            border-radius: 10px;
+            border-left: 4px solid #4fc3f7;
+        }
+
+        .task-item.done {
+            opacity: 0.6;
+            text-decoration: line-through;
+            border-left-color: #95a5a6;
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .small-button {
+            padding: 8px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .done-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .hero-area {
+            text-align: center;
+            padding: 35px 0;
+            color: white;
+        }
+
+        .hero-area h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #4fc3f7;
+            font-weight: 700;
+        }
+
+        .hero-area p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #8892b0;
+        }
+
+        .success-msg {
+            background: #4caf50;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero-area h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-area p {
+                font-size: 1rem;
+            }
+
+            .section-card {
+                padding: 22px;
+            }
+
+            .todo-input-area {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 15px;
+            }
+
+            .header-nav {
+                padding: 15px 20px;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .hero-area h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="header-nav">
+            <div class="logo-text">Connect & Create</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#productivity">Productivity</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero-area">
+            <h1>Welcome to Your Personal Hub</h1>
+            <p>Connect with us and boost your productivity in one simple space</p>
+        </section>
+
+        <div class="grid-container">
+            <div class="section-card">
+                <h2>📧 Get in Touch</h2>
+                <form id="contactForm">
+                    <div class="form-field">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        <div class="error-text" id="nameError">Please enter your name</div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <div class="error-text" id="emailError">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+                        <div class="error-text" id="messageError">Please enter your message</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="success-msg" id="successMessage">
+                    Thank you! Your message has been sent successfully!
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>✅ My Todo List</h2>
+                <div class="todo-input-area">
+                    <input type="text" id="todoInput" placeholder="What needs to be done?">
+                    <button onclick="addTask()" class="submit-btn">Add Task</button>
+                </div>
+                <div id="todoList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+            var valid = true;
+            
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('messageError').style.display = 'none';
+            
+            if (name === '') {
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            }
+            
+            if (email === '' || !email.includes('@')) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            }
+            
+            if (message === '') {
+                document.getElementById('messageError').style.display = 'block';
+                valid = false;
+            }
+            
+            if (valid) {
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset();
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        var tasks = [];
+        var taskId = 1;
+        
+        function addTask() {
+            var input = document.getElementById('todoInput');
+            var text = input.value.trim();
+            
+            if (text !== '') {
+                tasks.push({
+                    id: taskId,
+                    text: text,
+                    completed: false
+                });
+                taskId++;
+                input.value = '';
+                showTasks();
+            }
+        }
+        
+        function toggleTask(id) {
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i].id === id) {
+                    tasks[i].completed = !tasks[i].completed;
+                    break;
+                }
+            }
+            showTasks();
+        }
+        
+        function deleteTask(id) {
+            var newTasks = [];
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i].id !== id) {
+                    newTasks.push(tasks[i]);
+                }
+            }
+            tasks = newTasks;
+            showTasks();
+        }
+        
+        function showTasks() {
+            var container = document.getElementById('todoList');
+            container.innerHTML = '';
+            
+            for (var i = 0; i < tasks.length; i++) {
+                var task = tasks[i];
+                var taskDiv = document.createElement('div');
+                taskDiv.className = 'task-item';
+                
+                if (task.completed) {
+                    taskDiv.className += ' done';
+                }
+                
+                taskDiv.innerHTML = 
+                    '<span>' + task.text + '</span>' +
+                    '<div class="task-buttons">' +
+                        '<button onclick="toggleTask(' + task.id + ')" class="small-button done-btn">' +
+                            (task.completed ? 'Undo' : 'Done') +
+                        '</button>' +
+                        '<button onclick="deleteTask(' + task.id + ')" class="small-button delete-btn">' +
+                            'Delete' +
+                        '</button>' +
+                    '</div>';
+                
+                container.appendChild(taskDiv);
+            }
+        }
+        
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+        
+        tasks = [
+            { id: taskId++, text: 'Welcome to your todo list!', completed: false },
+            { id: taskId++, text: 'Try adding your own tasks', completed: false },
+            { id: taskId++, text: 'Click Done to complete tasks', completed: true }
+        ];
+        showTasks();
+   </script>
+</body>
+</html>
