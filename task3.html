@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuizBox</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fff);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .question {
+      font-size: 20px;
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .options button {
+      width: 100%;
+      padding: 12px;
+      margin: 6px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e3f2fd;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background-color: #bbdefb;
+    }
+
+    #result, #score {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    #play-again {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      align-self: center;
+    }
+
+    .joke-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .joke-section button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .joke-section p {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .question {
+        font-size: 18px;
+      }
+
+      .options button {
+        font-size: 15px;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="quizBox">
+    <h1>💻 Web Development Quiz</h1>
+    <div class="question" id="question">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="result"></div>
+    <div id="score"></div>
+    <button id="play-again" onclick="restartQuiz()">🔁 Play Again</button>
+  </div>
+
+  <div class="container joke-section">
+    <h2>😂 Get a Random Joke</h2>
+    <button onclick="getJoke()">Tell Me a Joke</button>
+    <p id="jokeText"></p>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "Which HTML tag is used to create a hyperlink?",
+        options: ["<link>", "<a>", "<href>", "<url>"],
+        answer: "<a>"
+      },
+      {
+        text: "Which CSS property controls the text size?",
+        options: ["font-weight", "text-style", "font-size", "text-align"],
+        answer: "font-size"
+      },
+      {
+        text: "Which of these is a JavaScript framework?",
+        options: ["Laravel", "Django", "React", "Flask"],
+        answer: "React"
+      },
+      {
+        text: "What does CSS stand for?",
+        options: ["Color Style Sheets", "Creative Style Sheets", "Cascading Style Sheets", "Computer Styled Sections"],
+        answer: "Cascading Style Sheets"
+      },
+      {
+        text: "Which tag is used to include JavaScript in HTML?",
+        options: ["<style>", "<script>", "<js>", "<code>"],
+        answer: "<script>"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("question").innerText = q.text;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      document.getElementById("result").innerText = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected) {
+      const correct = questions[currentQuestion].answer;
+      const resultDiv = document.getElementById("result");
+
+      if (selected === correct) {
+        resultDiv.innerText = "✅ Correct!";
+        resultDiv.style.color = "green";
+        score++;
+      } else {
+        resultDiv.innerText = `❌ Incorrect! Correct answer: ${correct}`;
+        resultDiv.style.color = "red";
+      }
+
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          loadQuestion();
+        } else {
+          showScore();
+        }
+      }, 1000);
+    }
+
+    function showScore() {
+      document.getElementById("question").style.display = "none";
+      document.getElementById("options").style.display = "none";
+      document.getElementById("result").style.display = "none";
+      document.getElementById("score").innerText = `🎉 You scored ${score} out of ${questions.length}!`;
+      document.getElementById("play-again").style.display = "inline-block";
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      document.getElementById("score").innerText = "";
+      document.getElementById("result").innerText = "";
+      document.getElementById("result").style.display = "block";
+      document.getElementById("play-again").style.display = "none";
+      document.getElementById("question").style.display = "block";
+      document.getElementById("options").style.display = "block";
+      loadQuestion();
+    }
+
+    function getJoke() {
+      fetch('https://icanhazdadjoke.com/', {
+        headers: { Accept: 'application/json' }
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("jokeText").innerText = data.joke;
+      })
+      .catch(() => {
+        document.getElementById("jokeText").innerText = "Couldn't fetch a joke. Try again!";
+      });
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
