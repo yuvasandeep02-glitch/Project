@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Tech Blog </title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>My Tech Blog</h1>
+    <input type="text" id="search" placeholder="Search posts..." />
+  </header>
+
+  <section id="new-post">
+    <h2>Write a Blog</h2>
+    <form id="post-form">
+      <input type="text" id="title" placeholder="Blog Title" required />
+      <textarea id="content" placeholder="Your blog content..." required></textarea>
+      <input type="text" id="category" placeholder="Category (e.g., Life, Code)" required />
+      <button type="submit">Publish Post</button>
+    </form>
+  </section>
+
+  <main id="blog-list">
+    <!-- Blog posts will appear here -->
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Tech Blog</p>
+  </footer>
+
+  <script src="javas.js"></script>
+</body>
+</html>
